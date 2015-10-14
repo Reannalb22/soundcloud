@@ -3,12 +3,28 @@
 
 <head>
     <title></title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
-
-<body>
-    <div class="container"></div>
+    <div id="container"></div>
     <script type="text/javascript" src="./app-browserify.js"></script>
+    <ul id = "results">
+    </ul>
+    <script type="text/javascript">
+	
+	var SC = require('soundcloud');
+
+	SC.initialize({
+	  	client_id: '935d17e70d4cceb1377e8f7795d10c1d'
+	  	redirect_uri: 'http://example.com/callback'
+	});
+
+	SC.stream('/tracks/2F47580057').then(function(player){
+  	player.play();
+	});
+    </script>
 </body>
 </html>
+
+
