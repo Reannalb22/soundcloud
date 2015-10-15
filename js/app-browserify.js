@@ -23,7 +23,7 @@ var SoundCollection = Backbone.Collection.extend({
 //--------------------Model------------------------
 
 var SoundModel = Backbone.Model.extend({
-	url: 'https://api.soundcloud.com/tracks/13158665',
+	url: 'https://api.soundcloud.com/tracks/4374882',
 	clientId: '935d17e70d4cceb1377e8f7795d10c1d'
 })
 

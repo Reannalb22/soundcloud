@@ -66,10 +66,27 @@
  * GENERAL
  */
 
-img {
-    max-width: 100%;
-}
+
 /**
  * YOUR CODE HERE
  */
+
+
+#container {
+    text-align: center;
+    margin-top: 50px;
+        h1 {
+            font-family: 'Sigmar One', cursive;
+        }
+
+        #song_title {
+            font-size: 25px;
+            margin: 10px;
+        }
+
+        img {
+            width: 400px;
+            height: 250px;
+         }
+ }
 

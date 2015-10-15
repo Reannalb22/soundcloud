@@ -9,7 +9,7 @@ var $ = require('jquery'),
 	console.log('all loaded up')
 
 
-	
+
 
 
 //---------------------------------------------------------------------
@@ -20,6 +20,7 @@ var MainView = React.createClass({
 		return(
 			<div>
 				<WelcomeTitle />
+				<SearchBar />
 				<AllzeData model = {this.props.model} />
 			</div>
 		)
@@ -34,7 +35,33 @@ var WelcomeTitle = React.createClass({
 	}
 })
 
+var SearchBar = React.createClass({
+	render: function(){
+		return(
+			<input type = "text" placeholder = "Find your Favorite Track"/>
+		)
+	}
+})
+
 var AllzeData = React.createClass({
+	
+	// getInitialState: function(){
+	// 	return {
+	// 		focusId: null
+	// 	}
+	// },
+
+	// _genPlayMusic = function(object){
+	// 	return (<ToggleMusic focus = {this.state.focusId} parentCommunicator = {this._walkieTalkie} music = {object}>)
+	// },
+
+	// _walkieTalkie: function(musicId) {
+	// 	this.setState({
+	// 		focusId: musicId
+	// 	})
+	// },
+
+
 	render: function(){
 		var zeTitle = this.props.model.get('title')
 		var playBackCount = this.props.model.get('playback_count')
@@ -50,15 +77,44 @@ var AllzeData = React.createClass({
 
 	return (
 		<div>
-			<p> {zeTitle} </p>
+			<p id = "song_title"> {zeTitle} </p>
 			<img src = {image}/> 
 			<p> Plays: {playBackCount}</p>
 			<p> Likes: {favorites} </p>
-			<audio src = {stream} controls autoplay></audio>
+			
 		</div>
 		)
 	}
 })
+
+// var Toggle Music = React.createClass({
+// 	_handleClick: function(){
+
+// 		SC.initialize({
+// 	    client_id: '935d17e70d4cceb1377e8f7795d10c1d',
+// 	    redirect_uri: 'callback.html'
+// 	});
+
+// 	var musicId = SC.stream('/tracks/13158665',{},function(player){
+// 		player.play();
+
+// 		})
+
+// 	if (this.className === 'pause') this.props.parentCommunicator(null)
+// 		else this.props.parentCommunicator(musicId)
+// 	},
+
+// 	render: function(){
+// 		console.log(this.props.focusId)
+// 		console.log('focus id above')
+
+
+
+// 		return (
+// 		<button type = "button" className = {this.className} onchange={this._handleClick}>Play/Pause</button>
+// 			)
+// 	}
+// })
 
 	
 
