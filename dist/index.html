@@ -8,9 +8,11 @@
     <link rel="stylesheet" type="text/css" href="./style.css">
     <link href='https://fonts.googleapis.com/css?family=Sigmar+One' rel='stylesheet' type='text/css'>
 </head>
-    <div id="container"></div>
+    <div id="container">
+    	
+    </div>
     <script type="text/javascript" src="./app-browserify.js"></script>
-    <script src="//connect.soundcloud.com/sdk.js"></script>
+<script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
     <ul id = "results">
     </ul>
  
@@ -19,11 +21,6 @@
 	    	client_id: '935d17e70d4cceb1377e8f7795d10c1d',
 	    	redirect_uri: 'callback.html'
 		});
-
-	var musicId = SC.stream('/tracks/4374882',{},function(player){
-		player.play();
-
-		})
 
 
    </script>

@@ -23,8 +23,14 @@ var SoundCollection = Backbone.Collection.extend({
 //--------------------Model------------------------
 
 var SoundModel = Backbone.Model.extend({
-	url: 'https://api.soundcloud.com/tracks/4374882',
-	clientId: '935d17e70d4cceb1377e8f7795d10c1d'
+	url: 'https://api.soundcloud.com/tracks/',
+	clientId: '935d17e70d4cceb1377e8f7795d10c1d',
+
+	parse: function(responseData){
+		var startingArray = responseData[0] 
+		console.log(responseData)
+		return startingArray
+	}
 })
 
 //----------------------------Router------------------------------
@@ -33,6 +39,7 @@ var SoundRouter = Backbone.Router.extend({
 
 
 	routes: {
+		'search/:name': 'searchMusic',
 		'home': 'getHome'
 	},
 
@@ -52,15 +59,36 @@ var SoundRouter = Backbone.Router.extend({
 			return deferredObj
 	},
 
+	getMusic: function(name){
+		var self = this
+		var deferredObj = this.sm.fetch({
+			// url: `${this.sm.url}`/${}
+			data: {
+				client_id: self.sm.clientId,
+				q: name
+			},
+			processData: true,
+			dataType: 'json'
+		})
+		return deferredObj
+	},
+
 	renderSoundCloud: function(){
 		console.log('routing is happening')
-		React.render(<MainView model = {this.sm} />, document.querySelector("#container"))
+		React.render(<MainView player= {'not real player'} model = {this.sm} />, document.querySelector("#container"))
+
 	},
 
 	getHome: function(){
 		var boundToRender = this.renderSoundCloud.bind(this)
 		var deferredObj = this.getData()
 		deferredObj.done(boundToRender)
+	},
+
+	searchMusic: function(name){
+		var boundto = this.renderSoundCloud.bind(this)
+		var deferredObj = this.getMusic(name)
+		deferredObj.done(boundto)
 	},
 
 

@@ -15,15 +15,22 @@ var $ = require('jquery'),
 //---------------------------------------------------------------------
 
 var MainView = React.createClass({
+	
+	componentDidMount: function(){
+		this.props.model.on("update sync", this.forceUpdate.bind(this))
+	},
+
+
 	render: function(){
 		console.log(this)
 		return(
 			<div>
 				<WelcomeTitle />
 				<SearchBar />
-				<AllzeData model = {this.props.model} />
+				<AllzeData player = {this.props.player} model = {this.props.model} />
 			</div>
 		)
+		//model and player being passed from the router
 	}
 })
 
@@ -36,33 +43,31 @@ var WelcomeTitle = React.createClass({
 })
 
 var SearchBar = React.createClass({
+	
+	_searchHandler: function(event){
+		if (event.keyCode === 13){
+			var inputEl = event.target,
+				name = inputEl.value
+			location.hash = `search/${name}`
+		}
+	},
+	
+
 	render: function(){
+	
 		return(
-			<input type = "text" placeholder = "Find your Favorite Track"/>
+			<input type = "text" placeholder = "Find your Favorite Track" onKeyDown = {this._searchHandler}/>
 		)
 	}
 })
 
+
+
 var AllzeData = React.createClass({
+
 	
-	// getInitialState: function(){
-	// 	return {
-	// 		focusId: null
-	// 	}
-	// },
-
-	// _genPlayMusic = function(object){
-	// 	return (<ToggleMusic focus = {this.state.focusId} parentCommunicator = {this._walkieTalkie} music = {object}>)
-	// },
-
-	// _walkieTalkie: function(musicId) {
-	// 	this.setState({
-	// 		focusId: musicId
-	// 	})
-	// },
-
-
 	render: function(){
+		console.log(this.props.model.attributes)
 		var zeTitle = this.props.model.get('title')
 		var playBackCount = this.props.model.get('playback_count')
 		var favorites = this.props.model.get('favoritings_count')
@@ -81,49 +86,106 @@ var AllzeData = React.createClass({
 			<img src = {image}/> 
 			<p> Plays: {playBackCount}</p>
 			<p> Likes: {favorites} </p>
-			
+			<Playbox player = {this.props.player} id = {this.props.model.get('id')} />
 		</div>
 		)
 	}
 })
 
-// var Toggle Music = React.createClass({
-// 	_handleClick: function(){
+var Playbox = React.createClass({
+	
+	getInitialState: function(){
+		return {
+			trackPlayer: null
+		}
+	},
 
-// 		SC.initialize({
-// 	    client_id: '935d17e70d4cceb1377e8f7795d10c1d',
-// 	    redirect_uri: 'callback.html'
-// 	});
-
-// 	var musicId = SC.stream('/tracks/13158665',{},function(player){
-// 		player.play();
-
-// 		})
-
-// 	if (this.className === 'pause') this.props.parentCommunicator(null)
-// 		else this.props.parentCommunicator(musicId)
-// 	},
-
-// 	render: function(){
-// 		console.log(this.props.focusId)
-// 		console.log('focus id above')
-
-
-
-// 		return (
-// 		<button type = "button" className = {this.className} onchange={this._handleClick}>Play/Pause</button>
-// 			)
-// 	}
-// })
+	componentDidMount: function(){
+		if (this.state.trackPlayer) 
+			this.state.trackPlayer.toggle()
+	},
 
 	
+	play : function(){
+		SC.stream(`/tracks/${this.props.id}`).then(function(player){
+			player.toggle()
+			this.setState({trackPlayer: player}).bind(Playbox)
+		});
+	},
 
 
+	render: function(){
+		console.log(this.props.model)
+		// var focusId = this.props.model.id 
 
-	
+		// var id = this.props.id 
+		
+		return(
+			<button onClick={this.play} id = "button"></button>
+		)
+	}
+})
 
 
 export default MainView
+
+
+
+
+
+
+
+
+
+
+// var isPlaying = false
+
+// var play = function(){
+// 	isPlaying = true;
+// 	something.play()
+// }
+// var pause =  function(){
+// 	isPlaying = false;
+// 	something.pause()
+// }
+
+// something.isPlaying
+
+
+
+
+
+
+
+
+// if (oracle.isplaying) this.state.player.pause()
+
+
+// TO ADDRESS: 
+
+// primary: make sure you can access the player as a property on the
+	// component, so that you can pause a playing track
+
+// secondary: write in some logic (or just use toggle) so that
+	// you pause if clicked while playing, and play if clicked
+	// while paused.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
