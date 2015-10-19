@@ -110,6 +110,7 @@ var Playbox = React.createClass({
 		SC.stream(`/tracks/${this.props.id}`).then(function(player){
 			player.toggle()
 			this.setState({trackPlayer: player}).bind(Playbox)
+
 		});
 	},
 
@@ -121,7 +122,7 @@ var Playbox = React.createClass({
 		// var id = this.props.id 
 		
 		return(
-			<button onClick={this.play} id = "button"></button>
+			<button onClick={this.play} id = "button">Play</button>
 		)
 	}
 })

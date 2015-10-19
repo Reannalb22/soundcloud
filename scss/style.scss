@@ -71,12 +71,19 @@
  * YOUR CODE HERE
  */
 
+body {
+    background-color: magenta;
+}
 
 #container {
     text-align: center;
     margin-top: 50px;
         h1 {
             font-family: 'Sigmar One', cursive;
+        }
+
+        input {
+            background-color: yellow;
         }
 
         #song_title {
@@ -87,6 +94,11 @@
         img {
             width: 400px;
             height: 250px;
-         }
+        }
+
+        button {
+            width: 60px;
+            height: 30px;
+        }
  }
 
