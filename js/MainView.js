@@ -85,7 +85,7 @@ var AllzeData = React.createClass({
 			<p id = "song_title"> {zeTitle} </p>
 			<img src = {image}/> 
 			<p> Plays: {playBackCount}</p>
-			<p> Likes: {favorites} </p>
+			<p id="likes"> Likes: {favorites} </p>
 			<Playbox player = {this.props.player} id = {this.props.model.get('id')} />
 		</div>
 		)
