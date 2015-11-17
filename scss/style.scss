@@ -72,7 +72,7 @@
  */
 
 body {
-    background-color: magenta;
+    background-color: aquamarine;
 }
 
 #container {
@@ -80,10 +80,6 @@ body {
     margin-top: 50px;
         h1 {
             font-family: 'Sigmar One', cursive;
-        }
-
-        input {
-            background-color: yellow;
         }
 
         #song_title {
@@ -94,6 +90,10 @@ body {
         img {
             width: 400px;
             height: 250px;
+        }
+
+        #likes {
+            text-indent: 0;
         }
 
         button {
